@@ -7,14 +7,48 @@
 //
 
 import UIKit
-class MenuBar: UIView {
+class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.backgroundColor = UIColor.rgb(red: 230, green: 32, blue: 31)
+        cv.dataSource = self
+        cv.delegate = self
+        return cv
+    }()
+    
+    let cellID = "cellID"
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.rgb(red: 230, green: 32, blue: 31)
+        
+        self.addSubview(self.collectionView)
+        self.addConstraints(with: "V:|[v0]|", views: self.collectionView)
+        self.addConstraints(with: "H:|[v0]|", views: self.collectionView)
+        
+        self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellID)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init has not been implemented.")
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
+        cell.backgroundColor = .blue
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: self.bounds.width / 4, height: self.bounds.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
 }

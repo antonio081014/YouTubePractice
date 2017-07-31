@@ -14,6 +14,8 @@
 		9AA5E1721F2FD19200C8719C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA5E1711F2FD19200C8719C /* Extensions.swift */; };
 		9AA5E1761F2FD31C00C8719C /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA5E1751F2FD31C00C8719C /* VideoCell.swift */; };
 		9AA5E1791F2FDF4200C8719C /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA5E1781F2FDF4100C8719C /* MenuBar.swift */; };
+		9AA5E17B1F2FF7C400C8719C /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA5E17A1F2FF7C400C8719C /* MenuCell.swift */; };
+		9AA5E17D1F2FF86F00C8719C /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA5E17C1F2FF86F00C8719C /* BaseCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		9AA5E1711F2FD19200C8719C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9AA5E1751F2FD31C00C8719C /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		9AA5E1781F2FDF4100C8719C /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
+		9AA5E17A1F2FF7C400C8719C /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		9AA5E17C1F2FF86F00C8719C /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,8 @@
 			children = (
 				9AA5E1751F2FD31C00C8719C /* VideoCell.swift */,
 				9AA5E1781F2FDF4100C8719C /* MenuBar.swift */,
+				9AA5E17A1F2FF7C400C8719C /* MenuCell.swift */,
+				9AA5E17C1F2FF86F00C8719C /* BaseCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -166,7 +172,9 @@
 			files = (
 				0385EB851F2EE62400DF0BBD /* HomeViewController.swift in Sources */,
 				9AA5E1761F2FD31C00C8719C /* VideoCell.swift in Sources */,
+				9AA5E17B1F2FF7C400C8719C /* MenuCell.swift in Sources */,
 				9AA5E1721F2FD19200C8719C /* Extensions.swift in Sources */,
+				9AA5E17D1F2FF86F00C8719C /* BaseCell.swift in Sources */,
 				0385EB831F2EE62400DF0BBD /* AppDelegate.swift in Sources */,
 				9AA5E1791F2FDF4200C8719C /* MenuBar.swift in Sources */,
 			);
