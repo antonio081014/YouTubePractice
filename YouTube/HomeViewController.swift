@@ -66,15 +66,17 @@ class VideoCell: UICollectionViewCell {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .purple
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Taylor Swift - Blank Space"
         return label
     }()
     
     let subtitleTextView: UITextView = {
         let textView = UITextView()
-        textView.backgroundColor = .red
         textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.text = "TaylorSwiftVEVO • 1,604,604,607 views • 2 years ago"
+        textView.textContainerInset = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: 0)
+        textView.textColor = .lightGray
         return textView
     }()
     
@@ -100,13 +102,13 @@ class VideoCell: UICollectionViewCell {
         self.addConstraint(NSLayoutConstraint(item: self.titleLabel, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 20))
         
         // Top
-        self.addConstraint(NSLayoutConstraint(item: self.subtitleTextView, attribute: .top, relatedBy: .equal, toItem: self.titleLabel, attribute: .bottom, multiplier: 1, constant: 8))
+        self.addConstraint(NSLayoutConstraint(item: self.subtitleTextView, attribute: .top, relatedBy: .equal, toItem: self.titleLabel, attribute: .bottom, multiplier: 1, constant: 4))
         // Left
         self.addConstraint(NSLayoutConstraint(item: self.subtitleTextView, attribute: .left, relatedBy: .equal, toItem: self.userProfileImageView, attribute: .right, multiplier: 1, constant: 8))
         // Right
         self.addConstraint(NSLayoutConstraint(item: self.subtitleTextView, attribute: .right, relatedBy: .equal, toItem: self.thumbnailImageView, attribute: .right, multiplier: 1, constant: 0))
         // Height
-        self.addConstraint(NSLayoutConstraint(item: self.subtitleTextView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 20))
+        self.addConstraint(NSLayoutConstraint(item: self.subtitleTextView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 30))
     }
     
     required init(coder deCoder: NSCoder) {
