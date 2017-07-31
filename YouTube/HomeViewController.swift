@@ -12,7 +12,16 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.navigationItem.title = "Home"
+        self.navigationController?.navigationBar.isTranslucent = false
+        
+        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width - 32, height: self.view.bounds.height))
+        titleLabel.text = "Home"
+        titleLabel.textColor = .white
+        titleLabel.font = UIFont.systemFont(ofSize: 20)
+        self.navigationItem.titleView = titleLabel
+        
         self.collectionView?.backgroundColor = UIColor.white
         
         self.collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellID")
@@ -115,16 +124,5 @@ class VideoCell: UICollectionViewCell {
     
     required init(coder deCoder: NSCoder) {
         fatalError("This init has not been implemented.")
-    }
-}
-
-extension UIView {
-    func addConstraints(with format: String, views: UIView...) {
-        var viewDictionary = [String: UIView]()
-        for (index, view) in views.enumerated() {
-            view.translatesAutoresizingMaskIntoConstraints = false
-            viewDictionary["v\(index)"] = view
-        }
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: viewDictionary))
     }
 }
