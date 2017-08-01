@@ -25,9 +25,24 @@ extension UIView {
     }
 }
 
-extension UIImageView {
+let imageCache = NSCache<NSString, UIImage>()
+
+class CustomImageView: UIImageView {
+    
+    var imageURLString: String?
+    
     func loadingImageUsingUrlString(urlString: String) {
+        
+        self.imageURLString = urlString
+        
         if let url = URL(string: urlString) {
+            self.image = nil
+            
+            if let image = imageCache.object(forKey: NSString(string: urlString)) {
+                self.image = image
+                return
+            }
+            
             URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
                 if error != nil {
                     print(error!)
@@ -35,7 +50,11 @@ extension UIImageView {
                 }
                 if let data = data {
                     DispatchQueue.main.async {
-                        self.image = UIImage(data: data)
+                        let imageToCache = UIImage(data: data)
+                        if urlString == self.imageURLString {
+                            self.image = imageToCache
+                        }
+                        imageCache.setObject(imageToCache!, forKey: NSString(string: urlString))
                     }
                 }
             }).resume()
