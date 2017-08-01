@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03850F391F305D7F00AEACCF /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03850F381F305D7F00AEACCF /* Video.swift */; };
 		0385EB831F2EE62400DF0BBD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0385EB821F2EE62400DF0BBD /* AppDelegate.swift */; };
 		0385EB851F2EE62400DF0BBD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0385EB841F2EE62400DF0BBD /* HomeViewController.swift */; };
 		0385EB8A1F2EE62400DF0BBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0385EB891F2EE62400DF0BBD /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		03850F381F305D7F00AEACCF /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		0385EB7F1F2EE62400DF0BBD /* YouTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0385EB821F2EE62400DF0BBD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0385EB841F2EE62400DF0BBD /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -43,6 +45,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03850F371F305D6F00AEACCF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				03850F381F305D7F00AEACCF /* Video.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		0385EB761F2EE62400DF0BBD = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +72,7 @@
 		0385EB811F2EE62400DF0BBD /* YouTube */ = {
 			isa = PBXGroup;
 			children = (
+				03850F371F305D6F00AEACCF /* Model */,
 				9AA5E1771F2FD80100C8719C /* Controller */,
 				9AA5E1741F2FD29400C8719C /* Views */,
 				0385EB821F2EE62400DF0BBD /* AppDelegate.swift */,
@@ -175,6 +186,7 @@
 				9AA5E17B1F2FF7C400C8719C /* MenuCell.swift in Sources */,
 				9AA5E1721F2FD19200C8719C /* Extensions.swift in Sources */,
 				9AA5E17D1F2FF86F00C8719C /* BaseCell.swift in Sources */,
+				03850F391F305D7F00AEACCF /* Video.swift in Sources */,
 				0385EB831F2EE62400DF0BBD /* AppDelegate.swift in Sources */,
 				9AA5E1791F2FDF4200C8719C /* MenuBar.swift in Sources */,
 			);
@@ -346,6 +358,7 @@
 				0385EB931F2EE62400DF0BBD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
