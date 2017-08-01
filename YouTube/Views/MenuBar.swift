@@ -19,15 +19,18 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     }()
     
     let cellID = "cellID"
+    let imageNames = ["home", "trending", "subscriptions", "account"]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        self.collectionView.register(MenuCell.self, forCellWithReuseIdentifier: cellID)
         
         self.addSubview(self.collectionView)
         self.addConstraints(with: "V:|[v0]|", views: self.collectionView)
         self.addConstraints(with: "H:|[v0]|", views: self.collectionView)
         
-        self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellID)
+        self.collectionView.selectItem(at: IndexPath.init(item: 0, section: 0), animated: false, scrollPosition: .top)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -39,8 +42,8 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
-        cell.backgroundColor = .blue
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! MenuCell
+        cell.imageView.image = UIImage(named: self.imageNames[indexPath.item])?.withRenderingMode(.alwaysTemplate)
         return cell
     }
     
