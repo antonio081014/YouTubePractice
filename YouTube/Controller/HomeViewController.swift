@@ -79,7 +79,14 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
     @objc private func search() {}
-    @objc private func more() {}
+    
+    let settingsLauncher = SettingsLauncher()
+    
+    @objc private func more() {
+        self.settingsLauncher.showSettings()
+    }
+    
+    
     
     let menuBar: MenuBar = {
         let mb = MenuBar()

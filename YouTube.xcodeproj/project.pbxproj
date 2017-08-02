@@ -12,6 +12,7 @@
 		0385EB851F2EE62400DF0BBD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0385EB841F2EE62400DF0BBD /* HomeViewController.swift */; };
 		0385EB8A1F2EE62400DF0BBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0385EB891F2EE62400DF0BBD /* Assets.xcassets */; };
 		0385EB8D1F2EE62400DF0BBD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0385EB8B1F2EE62400DF0BBD /* LaunchScreen.storyboard */; };
+		9A002D841F32946B00D0AE32 /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A002D831F32946B00D0AE32 /* SettingsLauncher.swift */; };
 		9AA5E1721F2FD19200C8719C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA5E1711F2FD19200C8719C /* Extensions.swift */; };
 		9AA5E1761F2FD31C00C8719C /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA5E1751F2FD31C00C8719C /* VideoCell.swift */; };
 		9AA5E1791F2FDF4200C8719C /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA5E1781F2FDF4100C8719C /* MenuBar.swift */; };
@@ -27,6 +28,7 @@
 		0385EB891F2EE62400DF0BBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0385EB8C1F2EE62400DF0BBD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0385EB8E1F2EE62400DF0BBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9A002D831F32946B00D0AE32 /* SettingsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
 		9AA5E1711F2FD19200C8719C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9AA5E1751F2FD31C00C8719C /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		9AA5E1781F2FDF4100C8719C /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				0385EB841F2EE62400DF0BBD /* HomeViewController.swift */,
+				9A002D831F32946B00D0AE32 /* SettingsLauncher.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 			files = (
 				0385EB851F2EE62400DF0BBD /* HomeViewController.swift in Sources */,
 				9AA5E1761F2FD31C00C8719C /* VideoCell.swift in Sources */,
+				9A002D841F32946B00D0AE32 /* SettingsLauncher.swift in Sources */,
 				9AA5E17B1F2FF7C400C8719C /* MenuCell.swift in Sources */,
 				9AA5E1721F2FD19200C8719C /* Extensions.swift in Sources */,
 				9AA5E17D1F2FF86F00C8719C /* BaseCell.swift in Sources */,
