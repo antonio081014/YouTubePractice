@@ -9,13 +9,22 @@
 import UIKit
 
 class Setting: NSObject {
-    let name: String
+    let name: SettingName
     let imageName: String
     
-    init(name: String, imageName: String) {
+    init(name: SettingName, imageName: String) {
         self.name = name
         self.imageName = imageName
     }
+}
+
+enum SettingName: String {
+    case cancel = "Cancel"
+    case setting = "Setting"
+    case privacy = "Terms & privacy policy"
+    case feedback = "Send Feedback"
+    case help = "Help"
+    case switch_account = "Switch Account"
 }
 
 class SettingsLauncher: NSObject, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
@@ -35,12 +44,12 @@ class SettingsLauncher: NSObject, UICollectionViewDelegateFlowLayout, UICollecti
     weak var homeViewController: HomeViewController?
     
     let settings: [Setting] = {
-        return [Setting(name: "Settings", imageName: "settings"),
-                Setting(name: "Terms & privacy policy", imageName: "privacy"),
-                Setting(name: "Send Feedback", imageName: "feedback"),
-                Setting(name: "Help", imageName: "help"),
-                Setting(name: "Switch Account", imageName: "switch_account"),
-                Setting(name: "Cancel", imageName: "cancel")]
+        return [Setting(name: .setting, imageName: "settings"),
+                Setting(name: .privacy, imageName: "privacy"),
+                Setting(name: .feedback, imageName: "feedback"),
+                Setting(name: .help, imageName: "help"),
+                Setting(name: .switch_account, imageName: "switch_account"),
+                Setting(name: .cancel, imageName: "cancel")]
     }()
     
     func showSettings() {
@@ -109,7 +118,7 @@ class SettingsLauncher: NSObject, UICollectionViewDelegateFlowLayout, UICollecti
             }
         }) { (completed) in
             let setting = self.settings[indexPath.item]
-            if setting.name != "Cancel" {
+            if setting.name != .cancel {
                 self.homeViewController?.showController(for: setting)
             }
         }
