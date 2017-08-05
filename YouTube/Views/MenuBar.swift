@@ -31,10 +31,35 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         self.addConstraints(with: "H:|[v0]|", views: self.collectionView)
         
         self.collectionView.selectItem(at: IndexPath.init(item: 0, section: 0), animated: false, scrollPosition: .top)
+        
+        self.setupHorizontalBar()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init has not been implemented.")
+    }
+    
+    var horizontalBarLeftAnchorConstraint: NSLayoutConstraint?
+    
+    func setupHorizontalBar() {
+        let horizontalBarView = UIView()
+        horizontalBarView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        horizontalBarView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(horizontalBarView)
+        
+        self.horizontalBarLeftAnchorConstraint = horizontalBarView.leftAnchor.constraint(equalTo: self.leftAnchor)
+        self.horizontalBarLeftAnchorConstraint?.isActive = true
+        horizontalBarView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        horizontalBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/4).isActive = true
+        horizontalBarView.heightAnchor.constraint(equalToConstant: 4).isActive = true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let x = CGFloat(indexPath.item) * collectionView.bounds.width / 4
+        self.horizontalBarLeftAnchorConstraint?.constant = x
+        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.layoutIfNeeded()
+        }, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
