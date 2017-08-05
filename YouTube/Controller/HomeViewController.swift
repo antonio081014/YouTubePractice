@@ -53,11 +53,10 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
         
         self.fetchVideos()
         
-        self.navigationItem.title = "Home"
         self.navigationController?.navigationBar.isTranslucent = false
         
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width - 32, height: self.view.bounds.height))
-        titleLabel.text = "Home"
+        titleLabel.text = "  Home"
         titleLabel.textColor = .white
         titleLabel.font = UIFont.systemFont(ofSize: 20)
         self.navigationItem.titleView = titleLabel
@@ -105,9 +104,19 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
     }()
     
     private func setupMenuBar() {
+        self.navigationController?.hidesBarsOnSwipe = true
+        
+        let redView = UIView()
+        redView.backgroundColor = UIColor.rgb(red: 230, green: 32, blue: 31)
+        self.view.addSubview(redView)
+        self.view.addConstraints(with: "H:|[v0]|", views: redView)
+        self.view.addConstraints(with: "V:[v0(50)]", views: redView)
+        
         self.view.addSubview(self.menuBar)
         self.view.addConstraints(with: "H:|[v0]|", views: self.menuBar)
-        self.view.addConstraints(with: "V:|[v0(50)]", views: self.menuBar)
+        self.view.addConstraints(with: "V:[v0(50)]", views: self.menuBar)
+
+        self.menuBar.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor).isActive = true
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
