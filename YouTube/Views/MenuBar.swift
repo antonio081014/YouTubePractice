@@ -20,6 +20,8 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     
     let cellID = "cellID"
     let imageNames = ["home", "trending", "subscriptions", "account"]
+    var horizontalBarLeftAnchorConstraint: NSLayoutConstraint?
+    weak var homeViewController: HomeViewController?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,8 +41,6 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         fatalError("init has not been implemented.")
     }
     
-    var horizontalBarLeftAnchorConstraint: NSLayoutConstraint?
-    
     func setupHorizontalBar() {
         let horizontalBarView = UIView()
         horizontalBarView.backgroundColor = UIColor(white: 0.95, alpha: 1)
@@ -55,11 +55,7 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let x = CGFloat(indexPath.item) * collectionView.bounds.width / 4
-        self.horizontalBarLeftAnchorConstraint?.constant = x
-        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.layoutIfNeeded()
-        }, completion: nil)
+        self.homeViewController?.scrollToMenuIndex(indexPath.item)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
