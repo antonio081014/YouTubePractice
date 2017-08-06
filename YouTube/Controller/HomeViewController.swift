@@ -13,6 +13,9 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
     var videos: [Video]?
     
     let cellID = "cellID"
+    let trendingCellID = "trendingCellID"
+    let subscriptionCellID = "subscriptionCellID"
+    let accountCellID = "accountCellID"
     
     let titles = ["Home", "Trending", "Subscriptions", "Account"]
     
@@ -39,6 +42,9 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
         }
         self.collectionView?.backgroundColor = UIColor.white
         self.collectionView?.register(FeedsCell.self, forCellWithReuseIdentifier: cellID)
+        self.collectionView?.register(TrendingCell.self, forCellWithReuseIdentifier: trendingCellID)
+        self.collectionView?.register(SubscriptionCell.self, forCellWithReuseIdentifier: subscriptionCellID)
+        self.collectionView?.register(AccountCell.self, forCellWithReuseIdentifier: accountCellID)
         self.collectionView?.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
         self.collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
         
@@ -126,8 +132,18 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
-        return cell
+        switch indexPath.item {
+        case 0:
+            return collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
+        case 1:
+            return collectionView.dequeueReusableCell(withReuseIdentifier: trendingCellID, for: indexPath)
+        case 2:
+            return collectionView.dequeueReusableCell(withReuseIdentifier: subscriptionCellID, for: indexPath)
+        case 3:
+            return collectionView.dequeueReusableCell(withReuseIdentifier: accountCellID, for: indexPath)
+        default:
+            return UICollectionViewCell()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

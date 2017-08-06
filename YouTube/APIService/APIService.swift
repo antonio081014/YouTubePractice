@@ -10,9 +10,25 @@ import Foundation
 
 class APIService: NSObject {
     static let shared = APIService()
-    
+    let baseURLString = "https://s3-us-west-2.amazonaws.com/youtubeassets"
     func fetchVideos(completion: @escaping (([Video]) -> Swift.Void)) {
-        let url = URL(string: "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json")
+        self.fetchFeed(for: "\(self.baseURLString)/home.json", completion: completion)
+    }
+    
+    func fetchTrendingFeed(completion: @escaping (([Video]) -> Swift.Void)) {
+        self.fetchFeed(for: "\(self.baseURLString)/trending.json", completion: completion)
+    }
+    
+    func fetchSubscriptionFeed(completion: @escaping (([Video]) -> Swift.Void)) {
+        self.fetchFeed(for: "\(self.baseURLString)/subscriptions.json", completion: completion)
+    }
+    
+    func fetchAccountFeed(completion: @escaping (([Video]) -> Swift.Void)) {
+        self.fetchFeed(for: "\(self.baseURLString)/account.json", completion: completion)
+    }
+    
+    func fetchFeed(for urlString: String, completion: @escaping (([Video]) -> Swift.Void)) {
+        let url = URL(string: urlString)
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             if error != nil {
                 print(error!)
