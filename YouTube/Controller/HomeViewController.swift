@@ -9,7 +9,7 @@
 import UIKit
 
 class HomeViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-
+    
     var videos: [Video]?
     
     let cellID = "cellID"
@@ -104,12 +104,26 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
         self.view.addSubview(self.menuBar)
         self.view.addConstraints(with: "H:|[v0]|", views: self.menuBar)
         self.view.addConstraints(with: "V:[v0(50)]", views: self.menuBar)
-
+        
         self.menuBar.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor).isActive = true
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.menuBar.horizontalBarLeftAnchorConstraint?.constant = scrollView.contentOffset.x / 4
+        
+        let constant = scrollView.contentOffset.x / 4
+        let width = self.view.bounds.width / 4
+        for index in 0..<4 {
+            let left = CGFloat(index) * width
+            let cell = self.menuBar.collectionView.cellForItem(at: IndexPath(item: index, section: 0))
+            if abs(constant - left) < width {
+                let gap = abs(width - constant + left)
+                let num = gap / width
+                cell?.alpha = num
+            } else {
+                cell?.alpha = 0.3
+            }
+        }
     }
     
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -132,23 +146,23 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
         return self.view.bounds.size
     }
     
-//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return videos?.count ?? 0
-//    }
-//
-//    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath) as! VideoCell
-//        cell.video = self.videos?[indexPath.item]
-//        return cell
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let width = self.view.bounds.width
-//        let height = (width - 16 - 16) * 9 / 16
-//        return CGSize(width: width, height: height + 16 + 88)
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 0
-//    }
+    //    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    //        return videos?.count ?? 0
+    //    }
+    //
+    //    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    //        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath) as! VideoCell
+    //        cell.video = self.videos?[indexPath.item]
+    //        return cell
+    //    }
+    //
+    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    //        let width = self.view.bounds.width
+    //        let height = (width - 16 - 16) * 9 / 16
+    //        return CGSize(width: width, height: height + 16 + 88)
+    //    }
+    //
+    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    //        return 0
+    //    }
 }
