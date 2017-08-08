@@ -40,7 +40,7 @@ class VideoPlayerView: UIView {
     
     @objc func handlePause() {
         self.isPlaying = !self.isPlaying
-
+        
         if self.isPlaying {
             self.player?.play()
             self.pausePlayButton.setImage(UIImage(named: "pause"), for: .normal)
@@ -77,23 +77,25 @@ class VideoPlayerView: UIView {
     var player: AVPlayer?
     
     private func setupPlayerView() {
-        let urlString = "http://www.html5videoplayer.net/videos/toystory.mp4"
+        let urlString = "https://firebasestorage.googleapis.com/v0/b/gameofchats-762ca.appspot.com/o/message_movies%2F12323439-9729-4941-BA07-2BAE970967C7.mov?alt=media&token=3e37a093-3bc8-410f-84d3-38332af9c726"
+        //"http://www.html5videoplayer.net/videos/toystory.mp4"
         if let url = URL(string: urlString) {
             self.player = AVPlayer(url: url)
             let playerLayer = AVPlayerLayer(player: player)
             self.layer.addSublayer(playerLayer)
             playerLayer.frame = self.frame
-            player?.play()
+            self.player?.play()
             
             self.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
         }
     }
     
-    override func addObserver(_ observer: NSObject, forKeyPath keyPath: String, options: NSKeyValueObservingOptions = [], context: UnsafeMutableRawPointer?) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "currentItem.loadedTimeRanges" {
             self.activityIndicatorView.stopAnimating()
             self.controlsContainerView.backgroundColor = .clear
             self.pausePlayButton.isHidden = false
+            print("Received KVO notification.")
             self.isPlaying = true
         }
     }
