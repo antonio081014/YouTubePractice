@@ -15,16 +15,16 @@ class VideoPlayerView: UIView {
         let aiv = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
         aiv.translatesAutoresizingMaskIntoConstraints = false
         aiv.hidesWhenStopped = true
+        aiv.startAnimating()
         return aiv
     }()
     
-    lazy var pauseButton: UIButton = {
+    lazy var pausePlayButton: UIButton = {
         let button = UIButton(type: .system)
-        // TODO: Add play/pause image to assets.
-        let image = UIImage(named: "")
-        button.setImage(image, for: .normal)
+        button.setImage(UIImage(named: "pause"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .white
+        button.isHidden = true
         
         button.addTarget(self, action: #selector(handlePause), for: .touchUpInside)
         return button
@@ -36,8 +36,18 @@ class VideoPlayerView: UIView {
         return view
     }()
     
+    var isPlaying = false
+    
     @objc func handlePause() {
-        
+        self.isPlaying = !self.isPlaying
+
+        if self.isPlaying {
+            self.player?.play()
+            self.pausePlayButton.setImage(UIImage(named: "pause"), for: .normal)
+        } else {
+            self.player?.pause()
+            self.pausePlayButton.setImage(UIImage(named: "play"), for: .normal)
+        }
     }
     
     override init(frame: CGRect) {
@@ -52,11 +62,11 @@ class VideoPlayerView: UIView {
         self.activityIndicatorView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         self.activityIndicatorView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         
-        self.controlsContainerView.addSubview(self.pauseButton)
-        self.pauseButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        self.pauseButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        self.pauseButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        self.pauseButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        self.controlsContainerView.addSubview(self.pausePlayButton)
+        self.pausePlayButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        self.pausePlayButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        self.pausePlayButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        self.pausePlayButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         
         self.backgroundColor = .black
@@ -64,17 +74,18 @@ class VideoPlayerView: UIView {
         
     }
     
+    var player: AVPlayer?
+    
     private func setupPlayerView() {
-        // TODO: add a playable video link.
-        let urlString = ""
+        let urlString = "http://www.html5videoplayer.net/videos/toystory.mp4"
         if let url = URL(string: urlString) {
-            let player = AVPlayer(url: url)
+            self.player = AVPlayer(url: url)
             let playerLayer = AVPlayerLayer(player: player)
             self.layer.addSublayer(playerLayer)
             playerLayer.frame = self.frame
-            player.play()
+            player?.play()
             
-            player.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
+            self.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
         }
     }
     
@@ -82,6 +93,8 @@ class VideoPlayerView: UIView {
         if keyPath == "currentItem.loadedTimeRanges" {
             self.activityIndicatorView.stopAnimating()
             self.controlsContainerView.backgroundColor = .clear
+            self.pausePlayButton.isHidden = false
+            self.isPlaying = true
         }
     }
     
