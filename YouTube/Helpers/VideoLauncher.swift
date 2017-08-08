@@ -66,8 +66,7 @@ class VideoPlayerView: UIView {
         slider.minimumTrackTintColor = .red
         slider.maximumTrackTintColor = .white
         // slider.thumbTintColor = .red
-        // TODO: add thumbimage to assets.
-        slider.setThumbImage(UIImage(named:""), for: .normal)
+        slider.setThumbImage(UIImage(named:"thumb"), for: .normal)
         
         slider.addTarget(self, action: #selector(handleSliderChange), for: .valueChanged)
         return slider
