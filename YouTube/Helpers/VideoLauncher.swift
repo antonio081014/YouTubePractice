@@ -55,7 +55,7 @@ class VideoPlayerView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "00:00"
         label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.font = UIFont.boldSystemFont(ofSize: 13)
         label.textAlignment = .right
         return label
     }()
@@ -70,6 +70,15 @@ class VideoPlayerView: UIView {
         
         slider.addTarget(self, action: #selector(handleSliderChange), for: .valueChanged)
         return slider
+    }()
+    
+    let currentTimeLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "00:00"
+        label.textColor = .white
+        label.font = UIFont.boldSystemFont(ofSize: 13)
+        return label
     }()
     
     @objc func handleSliderChange() {
@@ -87,6 +96,8 @@ class VideoPlayerView: UIView {
         
         self.setupPlayerView()
         
+        self.setupGradientLayer()
+        
         self.controlsContainerView.frame = frame
         self.addSubview(self.controlsContainerView)
         
@@ -100,17 +111,21 @@ class VideoPlayerView: UIView {
         self.pausePlayButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         self.pausePlayButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        self.backgroundColor = .black
-        
         self.controlsContainerView.addSubview(self.videoLengthLabel)
         self.videoLengthLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8).isActive = true
         self.videoLengthLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -4).isActive = true
         
         self.controlsContainerView.addSubview(self.videoSlider)
         self.videoSlider.rightAnchor.constraint(equalTo: self.videoLengthLabel.leftAnchor, constant: -8).isActive = true
-        self.videoSlider.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
         self.videoSlider.bottomAnchor.constraint(equalTo: self.videoLengthLabel.bottomAnchor, constant: 0).isActive = true
         self.videoSlider.topAnchor.constraint(equalTo: self.videoLengthLabel.topAnchor, constant: 0).isActive = true
+        
+        self.controlsContainerView.addSubview(self.currentTimeLabel)
+        self.currentTimeLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
+        self.currentTimeLabel.centerYAnchor.constraint(equalTo: self.videoLengthLabel.centerYAnchor, constant: 0).isActive = true
+        self.currentTimeLabel.rightAnchor.constraint(equalTo: self.videoSlider.leftAnchor, constant: -8).isActive = true
+        
+        self.backgroundColor = .black
     }
     
     var player: AVPlayer?
@@ -126,7 +141,30 @@ class VideoPlayerView: UIView {
             self.player?.play()
             
             self.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
+            // track player progress.
+            let interval = CMTime(value: 1, timescale: 2)
+            self.player?.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main, using: { (progressTime) in
+                
+                let seconds = CMTimeGetSeconds(progressTime)
+                let secondsText = String(format: "%02d", Int(seconds) % 60)
+                let minutesText = String(format: "%02d", Int(seconds) / 60)
+                self.currentTimeLabel.text = "\(minutesText):\(secondsText)"
+                
+                // lets move the slider thumb
+                if let duration = self.player?.currentItem?.duration {
+                    let durationSeconds = CMTimeGetSeconds(duration)
+                    self.videoSlider.value = Float(seconds / durationSeconds)
+                }
+            })
         }
+    }
+    
+    private func setupGradientLayer() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = bounds
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradientLayer.locations = [0.7, 1.2]
+        self.controlsContainerView.layer.addSublayer(gradientLayer)
     }
     
     var count = 0
